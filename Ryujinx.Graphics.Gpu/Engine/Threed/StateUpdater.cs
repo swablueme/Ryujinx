@@ -1354,6 +1354,8 @@ namespace Ryujinx.Graphics.Gpu.Engine.Threed
                 _state.State.AlphaTestFunc,
                 _state.State.AlphaTestRef,
                 ref attributeTypes,
+                false,
+                _channel.BufferManager.UnalignedStorageBuffers > 0,
                 _drawState.HasConstantBufferDrawParameters);
         }
 
@@ -1383,7 +1385,7 @@ namespace Ryujinx.Graphics.Gpu.Engine.Threed
                 //  ScaleZ = (Far - Near) / 2
                 // DepthNear/Far are sorted such as that Near is always less than Far.
                 depthMode = extents.DepthNear != transform.TranslateZ &&
-                            extents.DepthFar  != transform.TranslateZ
+                            extents.DepthFar != transform.TranslateZ
                     ? DepthMode.MinusOneToOne
                     : DepthMode.ZeroToOne;
             }
